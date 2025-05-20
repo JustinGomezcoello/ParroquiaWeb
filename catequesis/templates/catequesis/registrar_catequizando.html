@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Catequizando</title>
+</head>
+<body>
+    <h1>Formulario de Registro</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Nombres:</label> <input type="text" name="nombres"><br>
+        <label>Apellidos:</label> <input type="text" name="apellidos"><br>
+        <label>Fecha de Nacimiento:</label> <input type="date" name="fechanacimiento"><br>
+        <label>Parroquia de Origen:</label> <input type="text" name="parroquiaorigen"><br>
+        <label>Estado:</label> <input type="text" name="estado"><br>
+        <label>Tiene Fe de Bautismo:</label> <input type="checkbox" name="tienefebautismo"><br>
+        <label>Observaciones:</label> <textarea name="observaciones"></textarea><br><br>
+        <input type="submit" value="Registrar">
+    </form>
+
+    {% if mensaje %}
+        <p><strong>{{ mensaje }}</strong></p>
+    {% endif %}
+</body>
+</html>

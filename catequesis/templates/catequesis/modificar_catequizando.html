@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar Catequizando</title>
+</head>
+<body>
+    <h2>✏️ Modificar Catequizando</h2>
+
+    {% if mensaje %}
+        <p style="color: {% if '✅' in mensaje %}green{% else %}red{% endif %};">
+            {{ mensaje }}
+        </p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label>Nombres:</label>
+        <input type="text" name="nombres" value="{{ catequizando.1 }}" required><br>
+
+        <label>Apellidos:</label>
+        <input type="text" name="apellidos" value="{{ catequizando.2 }}" required><br>
+
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" name="fechanacimiento" value="{{ catequizando.3|date:'Y-m-d' }}" required><br>
+
+        <label>Parroquia de Origen:</label>
+        <input type="text" name="parroquiaorigen" value="{{ catequizando.4 }}" required><br>
+
+        <label>Estado:</label>
+        <input type="text" name="estado" value="{{ catequizando.5 }}" required><br>
+
+        <label>Tiene Fe de Bautismo:</label>
+        <input type="checkbox" name="tienefebautismo" {% if catequizando.6 == 1 %}checked{% endif %}><br>
+
+        <label>Observaciones:</label>
+        <textarea name="observaciones">{{ catequizando.7 }}</textarea><br><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <br>
+    <a href="{% url 'listar_todos_catequizandos' %}">⬅️ Volver a la Lista</a>
+</body>
+</html>

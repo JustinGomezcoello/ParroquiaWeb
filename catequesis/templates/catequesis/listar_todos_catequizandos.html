@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos los Catequizandos</title>
+</head>
+<body>
+    <h2>📋 Todos los Catequizandos</h2>
+
+    <!-- Mostrar mensajes tipo flash -->
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'success' %}green{% else %}red{% endif %};">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Mostrar mensaje directo si existe -->
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Parroquia</th>
+            <th>Estado</th>
+            <th>Fe Bautismo</th>
+            <th>Observaciones</th>
+            <th>Acciones</th>
+        </tr>
+        {% for c in resultado %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.nombres }}</td>
+            <td>{{ c.apellidos }}</td>
+            <td>{{ c.fechanacimiento }}</td>
+            <td>{{ c.parroquia }}</td>
+            <td>{{ c.estado }}</td>
+            <td>{{ c.tienefebautismo }}</td>
+            <td>{{ c.observaciones }}</td>
+            <td>
+                <a href="{% url 'modificar_catequizando' c.id %}">✏️ Editar</a> |
+                <a href="{% url 'eliminar_catequizando' c.id %}">🗑️ Eliminar</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{% url 'home' %}">⬅️ Volver al Inicio</a>
+</body>
+</html>

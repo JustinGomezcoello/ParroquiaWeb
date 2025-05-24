@@ -114,19 +114,12 @@ python manage.py runserver
 ---
 
 ## 💡 Funcionalidades Especiales
-
+```
 🔸 **Validaciones Lógicas**: Al registrar un catequista, se valida la existencia del nivel de catequesis.
 🔸 **Eliminación en Cascada**: Si intentas eliminar un catequista con asignaciones, el sistema te pide confirmación para eliminar las asignaciones relacionadas.
 🔸 **Interfaz Bonita y Minimalista**: La interfaz de login y páginas están estilizadas para una mejor experiencia.
+```
 
----
-
-## 📋 To-Do
-
-✅ Mejorar la interfaz gráfica
-✅ Generar reportes PDF
-✅ Documentar stored procedures
-✅ Agregar mensajes de confirmación más visuales
 
 ---
 

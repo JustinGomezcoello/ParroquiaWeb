@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>🔒 Iniciar Sesión - Sistema Catequesis</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 60px;
+            margin: 0;
+        }
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 12px;
+            display: inline-block;
+            min-width: 300px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #00c6ff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #007acc;
+        }
+        .error-message {
+            background-color: #ff4b5c;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔒 Iniciar Sesión</h2>
+
+    {% if messages %}
+        <div class="error-message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">👤 Usuario:</label>
+        <input type="text" name="username" placeholder="Ingresa tu usuario" required>
+
+        <label for="password">🔑 Contraseña:</label>
+        <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
+
+        <button type="submit">Acceder</button>
+    </form>
+
+    <div class="footer">
+        © 2025 Sistema Catequesis | Grupo 7
+    </div>
+</body>
+</html>

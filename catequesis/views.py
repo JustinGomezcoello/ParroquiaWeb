@@ -2,8 +2,32 @@
 from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib import messages  # si vas a mostrar mensajes
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
+# Vista para Login
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('catequesis:home')
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos')
+    return render(request, 'login.html')
+
+
+# Vista para Logout
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
 def registrar_catequizando(request):
     mensaje = ""
     if request.method == 'POST':
@@ -28,7 +52,7 @@ def registrar_catequizando(request):
                 mensaje = f"❌ Error: {str(e)}"
 
     return render(request, 'catequesis/registrar_catequizando.html', {'mensaje': mensaje})
-
+@login_required
 def listar_catequizandos(request):
     resultado = []
     mensaje = ""
@@ -50,10 +74,10 @@ def listar_catequizandos(request):
 
     return render(request, 'catequesis/listar_catequizandos.html', {'resultado': resultado, 'mensaje': mensaje})
 
-
+@login_required
 def home(request):
     return render(request, 'catequesis/home.html')
-
+@login_required
 def listar_todos_catequizandos(request):
     resultado = []
     mensaje = ""
@@ -79,7 +103,7 @@ def listar_todos_catequizandos(request):
         'mensaje': mensaje
     })
 
-
+@login_required
 def modificar_catequizando(request, id):
     mensaje = ""
     if request.method == 'POST':
@@ -116,7 +140,7 @@ def modificar_catequizando(request, id):
 
 
 
-
+@login_required
 def eliminar_catequizando(request, id):
     mensaje = ""
     with connection.cursor() as cursor:
@@ -133,6 +157,7 @@ def eliminar_catequizando(request, id):
 
 
 #CRUD CATEQUISTAS
+@login_required
 def listar_catequistas(request):
     resultado = []
     mensaje = ""
@@ -146,7 +171,7 @@ def listar_catequistas(request):
             mensaje = f"❌ Error: {str(e)}"
     return render(request, 'catequesis/listar_catequistas.html', {'resultado': resultado, 'mensaje': mensaje})
 
-
+@login_required
 def registrar_catequista(request):
     mensaje = ""
     if request.method == 'POST':
@@ -177,7 +202,7 @@ def registrar_catequista(request):
     return render(request, 'catequesis/registrar_catequista.html', {'mensaje': mensaje})
 
 
-
+@login_required
 def modificar_catequista(request, id):
     mensaje = ""
     if request.method == 'POST':
@@ -203,7 +228,7 @@ def modificar_catequista(request, id):
 
     return render(request, 'catequesis/modificar_catequista.html', {'catequista': row, 'mensaje': mensaje})
 
-
+@login_required
 def eliminar_catequista(request, id):
     with connection.cursor() as cursor:
         try:
@@ -224,7 +249,7 @@ def eliminar_catequista(request, id):
                 print(f"❌ Error al eliminar: {error_msg}")
     return redirect('catequesis:listar_catequistas')
 
-
+@login_required
 def eliminar_catequista_confirmado(request, id):
     with connection.cursor() as cursor:
         try:

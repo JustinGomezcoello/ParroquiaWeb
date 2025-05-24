@@ -5,14 +5,14 @@
 ---
 
 ## 🚀 Funcionalidades Principales
-
+```
 ✅ Registro, modificación y eliminación de **catequistas**
 ✅ Registro, modificación y eliminación de **catequizandos**
 ✅ Validación de relaciones con la base de datos SQL Server
 ✅ Login y logout de usuarios
 ✅ Eliminación en cascada con confirmación de catequistas
 ✅ Mensajes visuales de éxito y error
-
+```
 ---
 
 ## 🛠️ Tecnologías Usadas
@@ -115,9 +115,9 @@ python manage.py runserver
 
 ## 💡 Funcionalidades Especiales
 ```
-🔸 **Validaciones Lógicas**: Al registrar un catequista, se valida la existencia del nivel de catequesis.
-🔸 **Eliminación en Cascada**: Si intentas eliminar un catequista con asignaciones, el sistema te pide confirmación para eliminar las asignaciones relacionadas.
-🔸 **Interfaz Bonita y Minimalista**: La interfaz de login y páginas están estilizadas para una mejor experiencia.
+🔸 Validaciones Lógicas: Al registrar un catequista, se valida la existencia del nivel de catequesis.
+🔸 Eliminación en Cascada: Si intentas eliminar un catequista con asignaciones, el sistema te pide confirmación para eliminar las asignaciones relacionadas.
+🔸 Interfaz Bonita y Minimalista: La interfaz de login y páginas están estilizadas para una mejor experiencia.
 ```
 
 

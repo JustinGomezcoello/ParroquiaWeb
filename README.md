@@ -141,6 +141,4 @@ Así no subirás tu entorno virtual ni archivos temporales.
 
 ---
 
-## 💙 Créditos
 
-Desarro

@@ -44,8 +44,8 @@
             <td>{{ c.tienefebautismo }}</td>
             <td>{{ c.observaciones }}</td>
             <td>
-                <a href="{% url 'modificar_catequizando' c.id %}">✏️ Editar</a> |
-                <a href="{% url 'eliminar_catequizando' c.id %}">🗑️ Eliminar</a>
+                <a href="{% url 'catequesis:modificar_catequizando' c.id %}">✏️ Editar</a> |
+                <a href="{% url 'catequesis:eliminar_catequizando' c.id %}">🗑️ Eliminar</a>
 
             </td>
         </tr>

@@ -9,13 +9,14 @@
     <p>Usa los siguientes enlaces:</p>
     <ul>
         <!-- CRUD Catequizando -->
-        <li><a href="{% url 'registrar_catequizando' %}">Registrar Catequizando</a></li>
-        <li><a href="{% url 'listar_catequizandos' %}">Listar Catequizandos por Catequista</a></li>
-        <li><a href="{% url 'listar_todos_catequizandos' %}">Listar Todos los Catequizandos</a></li>
+        <li><a href="{% url 'catequesis:registrar_catequizando' %}">Registrar Catequizando</a></li>
+        <li><a href="{% url 'catequesis:listar_catequizandos' %}">Listar Catequizandos por Catequista</a></li>
+        <li><a href="{% url 'catequesis:listar_todos_catequizandos' %}">Listar Todos los Catequizandos</a></li>
 
-        <!-- CRUD Catequista -->        <!-- CRUD Catequista -->
+        <!-- CRUD Catequista -->
         <li><a href="{% url 'catequesis:registrar_catequista' %}">Registrar Catequista</a></li>
         <li><a href="{% url 'catequesis:listar_catequistas' %}">Listar Catequistas</a></li>
+
 
     </ul>
 </body>

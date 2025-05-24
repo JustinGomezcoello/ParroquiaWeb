@@ -13,4 +13,6 @@ urlpatterns = [
     path('catequistas/registrar/', views.registrar_catequista, name='registrar_catequista'),
     path('catequistas/modificar/<int:id>/', views.modificar_catequista, name='modificar_catequista'),
     path('catequistas/eliminar/<int:id>/', views.eliminar_catequista, name='eliminar_catequista'),
+    path('catequistas/eliminar_confirmado/<int:id>/', views.eliminar_catequista_confirmado, name='eliminar_catequista_confirmado'),
+
 ]

@@ -100,7 +100,7 @@ def modificar_catequizando(request, id):
                 """, [id, nombres, apellidos, fechanacimiento,
                       parroquia, estado, tienefe, observaciones])
                 mensaje = "✅ Catequizando modificado"
-                return redirect('listar_todos_catequizandos')
+                return redirect('catequesis:listar_todos_catequizandos')
             except Exception as e:
                 mensaje = f"❌ Error: {str(e)}"
 
@@ -126,7 +126,7 @@ def eliminar_catequizando(request, id):
         except Exception as e:
             mensaje = f"❌ Error al eliminar: {str(e)}"
     
-    return redirect('listar_todos_catequizandos')
+    return redirect('catequesis:listar_todos_catequizandos')
 
 
 
@@ -157,16 +157,25 @@ def registrar_catequista(request):
         rol = request.POST.get('rol')
         nivel = request.POST.get('nivel') or None
 
-        with connection.cursor() as cursor:
-            try:
+        try:
+            if nivel:
+                with connection.cursor() as cursor:
+                    cursor.execute("SELECT COUNT(*) FROM registro.nivelcatequesis WHERE idnivelcatequesis = %s", [nivel])
+                    count = cursor.fetchone()[0]
+                    if count == 0:
+                        mensaje = f"❌ El nivel con ID {nivel} no existe. Ingresa un valor válido entre 1 y 2"
+                        return render(request, 'catequesis/registrar_catequista.html', {'mensaje': mensaje})
+
+            with connection.cursor() as cursor:
                 cursor.execute("""
                     EXEC sp_RegistrarCatequista @nombres=%s, @apellidos=%s, @telefono=%s, @correo=%s, @rol=%s, @nivel=%s
                 """, [nombres, apellidos, telefono, correo, rol, nivel])
                 mensaje = "✅ Catequista registrado correctamente"
-            except Exception as e:
-                mensaje = f"❌ Error: {str(e)}"
+        except Exception as e:
+            mensaje = f"❌ Error: {str(e)}"
 
     return render(request, 'catequesis/registrar_catequista.html', {'mensaje': mensaje})
+
 
 
 def modificar_catequista(request, id):
@@ -184,7 +193,7 @@ def modificar_catequista(request, id):
                 cursor.execute("""
                     EXEC sp_ModificarCatequista @id=%s, @nombres=%s, @apellidos=%s, @telefono=%s, @correo=%s, @rol=%s, @nivel=%s
                 """, [id, nombres, apellidos, telefono, correo, rol, nivel])
-                return redirect('listar_catequistas')
+                return redirect('catequesis:listar_catequistas')
             except Exception as e:
                 mensaje = f"❌ Error: {str(e)}"
 
@@ -198,7 +207,28 @@ def modificar_catequista(request, id):
 def eliminar_catequista(request, id):
     with connection.cursor() as cursor:
         try:
-            cursor.execute("EXEC sp_EliminarCatequista @id=%s", [id])
+            # Primero intenta eliminar SIN forzar
+            cursor.execute("EXEC sp_EliminarCatequista @id=%s, @forzar=0", [id])
         except Exception as e:
-            print(f"❌ Error al eliminar: {str(e)}")
-    return redirect('listar_catequistas')
+            error_msg = str(e)
+            if 'No se puede eliminar el catequista' in error_msg:
+                # Extraer el número de asignaciones del mensaje
+                asignaciones = error_msg.split('tiene ')[1].split(' asignaciones')[0]
+                # Mostrar mensaje de confirmación
+                return render(request, 'catequesis/confirmar_eliminar_catequista.html', {
+                    'id': id,
+                    'asignaciones': asignaciones,
+                    'mensaje': 'El catequista tiene asignaciones. ¿Deseas eliminarlas también en cascada?'
+                })
+            else:
+                print(f"❌ Error al eliminar: {error_msg}")
+    return redirect('catequesis:listar_catequistas')
+
+
+def eliminar_catequista_confirmado(request, id):
+    with connection.cursor() as cursor:
+        try:
+            cursor.execute("EXEC sp_EliminarCatequista @id=%s, @forzar=1", [id])
+        except Exception as e:
+            print(f"❌ Error al eliminar (forzado): {str(e)}")
+    return redirect('catequesis:listar_catequistas')

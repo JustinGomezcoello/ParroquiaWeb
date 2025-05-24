@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Confirmar Eliminación</title>
+</head>
+<body>
+    <h2>⚠️ Confirmar Eliminación de Catequista</h2>
+    <p>{{ mensaje }}</p>
+    <p>Este catequista tiene <strong>{{ asignaciones }}</strong> asignaciones relacionadas.</p>
+
+    <form method="post" action="{% url 'catequesis:eliminar_catequista_confirmado' id %}">
+        {% csrf_token %}
+        <button type="submit">✅ Sí, eliminar en cascada</button>
+        <a href="{% url 'catequesis:listar_catequistas' %}">❌ No, cancelar</a>
+    </form>
+</body>
+</html>

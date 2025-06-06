@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+from pathlib import Path  # Importa Path para manejar rutas de manera moderna
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'catequesis',  # ⬅️ AGREGA ESTA LÍNEA
+    'catequesis',  # ⬅️ Asegúrate de que tu app esté registrada aquí
 ]
 
 
@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'ParroquiaDB',
-        'HOST': '.\SQLEXPRESS',
+        'HOST': 'UPOAULA10615',
         'PORT': '',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
@@ -89,8 +89,6 @@ DATABASES = {
         },
     }
 }
-
-
 
 
 # Password validation
@@ -129,10 +127,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/login/'
 
+STATIC_URL = '/static/'
+
+# Ruta para archivos estáticos en desarrollo
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Ahora BASE_DIR es un objeto Path, por lo que el operador / funciona correctamente
+]

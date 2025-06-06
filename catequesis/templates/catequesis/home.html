@@ -3,21 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio Catequesis</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #f9fbe7 100%);
+            min-height: 100vh;
+        }
+        .header {
+            position: relative;
+            border-radius: 0 0 30px 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(56,142,60,0.18);
+        }
+        .header-img {
+            width: 100%;
+            max-height: 260px;
+            object-fit: cover;
+            filter: brightness(0.7) blur(0.5px);
+            transition: filter 0.4s;
+        }
+        .header-content {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: linear-gradient(180deg,rgba(56,142,60,0.45) 0%,rgba(56,142,60,0.25) 100%);
+            text-shadow: 0 2px 16px rgba(0,0,0,0.25);
+        }
+        .header h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            animation: fadeInDown 1.1s;
+        }
+        .header .fa-church {
+            margin-right: 12px;
+            font-size: 2.1rem;
+            vertical-align: middle;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .main-content {
+            max-width: 500px;
+            margin: 60px auto 0 auto;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 2px 32px rgba(56,142,60,0.13);
+            padding: 44px 36px 32px 36px;
+            animation: fadeIn 1.1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .main-content p {
+            font-size: 1.18rem;
+            color: #388e3c;
+            margin-bottom: 28px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+        }
+        .main-content .fa-link {
+            margin-right: 8px;
+            color: #2e7d32;
+        }
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .link-list li {
+            margin: 20px 0;
+        }
+        .link-list a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            background: linear-gradient(90deg,#e8f5e9 60%,#f1f8e9 100%);
+            color: #388e3c;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 16px 26px;
+            border-radius: 12px;
+            transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
+            box-shadow: 0 1px 12px rgba(56,142,60,0.10);
+            border: 1.5px solid #c8e6c9;
+            position: relative;
+        }
+        .link-list a i {
+            font-size: 1.3em;
+            min-width: 24px;
+            text-align: center;
+        }
+        .link-list a:hover {
+            background: linear-gradient(90deg,#388e3c 60%,#43a047 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(56,142,60,0.18);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 22px 0 12px 0;
+            font-size: 1.05rem;
+            margin-top: 70px;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -2px 12px rgba(56,142,60,0.08);
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 18px 4vw 14px 4vw;
+                max-width: 98vw;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .header-content {
+                padding: 0 8px;
+            }
+            .header-img {
+                max-height: 120px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido al Sistema de Catequesis</h1>
-    <p>Usa los siguientes enlaces:</p>
-    <ul>
-        <!-- CRUD Catequizando -->
-        <li><a href="{% url 'catequesis:registrar_catequizando' %}">Registrar Catequizando</a></li>
-        <li><a href="{% url 'catequesis:listar_catequizandos' %}">Listar Catequizandos por Catequista</a></li>
-        <li><a href="{% url 'catequesis:listar_todos_catequizandos' %}">Listar Todos los Catequizandos</a></li>
-
-        <!-- CRUD Catequista -->
-        <li><a href="{% url 'catequesis:registrar_catequista' %}">Registrar Catequista</a></li>
-        <li><a href="{% url 'catequesis:listar_catequistas' %}">Listar Catequistas</a></li>
-
-
-    </ul>
+    <header class="header">
+        <img class="header-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Iglesia">
+        <div class="header-content">
+            <h1><i class="fa-solid fa-church"></i>Bienvenido al Sistema de Catequesis</h1>
+        </div>
+    </header>
+    <main class="main-content">
+        <p><i class="fa-solid fa-link"></i>Usa los siguientes enlaces:</p>
+        <ul class="link-list">
+            <li><a href="{% url 'catequesis:registrar_catequizando' %}"><i class="fa-solid fa-user-plus"></i> Registrar Catequizando</a></li>
+            <li><a href="{% url 'catequesis:listar_catequizandos' %}"><i class="fa-solid fa-users"></i> Listar Catequizandos por Catequista</a></li>
+            <li><a href="{% url 'catequesis:listar_todos_catequizandos' %}"><i class="fa-solid fa-list"></i> Listar Todos los Catequizandos</a></li>
+            <li><a href="{% url 'catequesis:registrar_catequista' %}"><i class="fa-solid fa-user-tie"></i> Registrar Catequista</a></li>
+            <li><a href="{% url 'catequesis:listar_catequistas' %}"><i class="fa-solid fa-address-book"></i> Listar Catequistas</a></li>
+        </ul>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 Sistema de Catequesis. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

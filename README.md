@@ -80,7 +80,7 @@ pip install django pyodbc django-mssql-backend
 ```python
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
+        'ENGINE': 'sql_server.pyodbc',
         'NAME': 'ParroquiaDB',
         'HOST': '.\\SQLEXPRESS',
         'OPTIONS': {

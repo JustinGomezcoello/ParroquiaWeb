@@ -1,17 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <title>Confirmar Eliminación</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-    <h2>⚠️ Confirmar Eliminación de Catequista</h2>
-    <p>{{ mensaje }}</p>
-    <p>Este catequista tiene <strong>{{ asignaciones }}</strong> asignaciones relacionadas.</p>
-
-    <form method="post" action="{% url 'catequesis:eliminar_catequista_confirmado' id %}">
-        {% csrf_token %}
-        <button type="submit">✅ Sí, eliminar en cascada</button>
-        <a href="{% url 'catequesis:listar_catequistas' %}">❌ No, cancelar</a>
-    </form>
+<body class="animated-fadein">
+    <div class="card animated-fadein" style="max-width: 420px;">
+        <h2 style="text-align:center; color:#c62828;"><i class="fa-solid fa-triangle-exclamation"></i> Confirmar Eliminación de Catequista</h2>
+        <div class="error" style="margin-bottom:18px;">{{ mensaje }}</div>
+        <p style="font-size:1.1em; text-align:center;">Este catequista tiene <strong>{{ asignaciones }}</strong> asignaciones relacionadas.</p>
+        <form method="post" action="{% url 'catequesis:eliminar_catequista_confirmado' id %}" class="animated-fadein" style="margin-bottom:0;">
+            {% csrf_token %}
+            <button type="submit" class="btn" style="background:#c62828; margin-right:10px;"><i class="fa-solid fa-trash"></i> Sí, eliminar en cascada</button>
+            <a href="{% url 'catequesis:listar_catequistas' %}" class="btn" style="background:#388e3c;"><i class="fa-solid fa-xmark"></i> No, cancelar</a>
+        </form>
+    </div>
 </body>
 </html>

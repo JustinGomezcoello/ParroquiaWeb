@@ -1,44 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <title>Lista de Catequistas</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-    <h2>📋 Lista de Catequistas</h2>
-
-    {% if mensaje %}
-        <p style="color: {% if '✅' in mensaje %}green{% else %}red{% endif %};">
-            {{ mensaje }}
-        </p>
-    {% endif %}
-
-    <table border="1">
-        <tr>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th>Nivel</th>
-            <th>Acciones</th>
-        </tr>
-        {% for c in resultado %}
-        <tr>
-            <td>{{ c.0 }}</td>  <!-- nombres -->
-            <td>{{ c.1 }}</td>  <!-- apellidos -->
-            <td>{{ c.2 }}</td>  <!-- teléfono -->
-            <td>{{ c.3 }}</td>  <!-- correo -->
-            <td>{{ c.4 }}</td>  <!-- rol -->
-            <td>{{ c.5 }}</td>  <!-- nivel -->
-            <td>
-                <a href="{% url 'catequesis:modificar_catequista' c.6 %}">✏️ Editar</a> |
-                <a href="{% url 'catequesis:eliminar_catequista' c.6 %}">🗑️ Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <br>
-    <a href="{% url 'catequesis:home' %}">⬅️ Volver al Inicio</a>
+<body class="animated-fadein">
+    <div class="card animated-fadein">
+        <h2 style="text-align:center;"><i class="fa-solid fa-address-book"></i> Lista de Catequistas</h2>
+        {% if mensaje %}
+            <div class="success">{{ mensaje }}</div>
+        {% endif %}
+        <div class="table-container animated-fadein">
+            <table>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Nivel</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for c in resultado %}
+                <tr>
+                    <td>{{ c.0 }}</td>
+                    <td>{{ c.1 }}</td>
+                    <td>{{ c.2 }}</td>
+                    <td>{{ c.3 }}</td>
+                    <td>{{ c.4 }}</td>
+                    <td>{{ c.5 }}</td>
+                    <td>
+                        <a href="{% url 'catequesis:modificar_catequista' c.6 %}" class="btn"><i class="fa-solid fa-pen"></i> Editar</a>
+                        <a href="{% url 'catequesis:eliminar_catequista' c.6 %}" class="btn"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <a href="{% url 'catequesis:home' %}" class="btn"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+    </div>
 </body>
 </html>

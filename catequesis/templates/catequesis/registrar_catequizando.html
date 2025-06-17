@@ -1,26 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Registrar Catequizando</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-    <h1>Formulario de Registro</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label>Nombres:</label> <input type="text" name="nombres"><br>
-        <label>Apellidos:</label> <input type="text" name="apellidos"><br>
-        <label>Fecha de Nacimiento:</label> <input type="date" name="fechanacimiento"><br>
-        <label>Parroquia de Origen:</label> <input type="text" name="parroquiaorigen"><br>
-        <label>Estado:</label> <input type="text" name="estado"><br>
-        <label>Tiene Fe de Bautismo:</label> <input type="checkbox" name="tienefebautismo"><br>
-        <label>Observaciones:</label> <textarea name="observaciones"></textarea><br><br>
-        <input type="submit" value="Registrar">
-    </form>
-
-    {% if mensaje %}
-        <p><strong>{{ mensaje }}</strong></p>
-    {% endif %}
-    <a href="{% url 'catequesis:home' %}">⬅️ Volver al Inicio</a>
+<body class="animated-fadein">
+    <div class="card animated-fadein">
+        <h1 style="text-align:center;"><i class="fa-solid fa-user-plus"></i> Formulario de Registro</h1>
+        <form method="post" class="animated-fadein">
+            {% csrf_token %}
+            <label><i class="fa-solid fa-user"></i> Nombres:</label> <input type="text" name="nombres"><br>
+            <label><i class="fa-solid fa-user"></i> Apellidos:</label> <input type="text" name="apellidos"><br>
+            <label><i class="fa-solid fa-calendar"></i> Fecha de Nacimiento:</label> <input type="date" name="fechanacimiento"><br>
+            <label><i class="fa-solid fa-church"></i> Parroquia de Origen:</label> <input type="text" name="parroquiaorigen"><br>
+            <label><i class="fa-solid fa-flag"></i> Estado:</label> <input type="text" name="estado"><br>
+            <label><i class="fa-solid fa-certificate"></i> Tiene Fe de Bautismo:</label> <input type="checkbox" name="tienefebautismo"><br>
+            <label><i class="fa-solid fa-comment"></i> Observaciones:</label> <textarea name="observaciones"></textarea><br><br>
+            <input type="submit" value="Registrar" class="btn">
+        </form>
+        {% if mensaje %}
+            <div class="success">{{ mensaje }}</div>
+        {% endif %}
+        <a href="{% url 'catequesis:home' %}" class="btn"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+    </div>
 </body>
 </html>

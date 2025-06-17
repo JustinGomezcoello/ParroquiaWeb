@@ -1,42 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Lista de Catequizandos</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-    <h1>Buscar Catequizandos por Catequista</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        <label>ID Catequista:</label>
-        <input type="number" name="idcatequista" required>
-        <button type="submit">Buscar</button>
-    </form>
-
-    {% if mensaje %}
-        <p><strong>{{ mensaje }}</strong></p>
-    {% endif %}
-
-    {% if resultado %}
-        <table border="1" cellpadding="5">
-            <tr>
-                <th>ID</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Estado</th>
-                <th>Parroquia</th>
-            </tr>
-            {% for c in resultado %}
-            <tr>
-                <td>{{ c.id }}</td>
-                <td>{{ c.nombres }}</td>
-                <td>{{ c.apellidos }}</td>
-                <td>{{ c.estado }}</td>
-                <td>{{ c.parroquia }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
-    <a href="{% url 'catequesis:home' %}">⬅️ Volver al Inicio</a>
+<body class="animated-fadein">
+    <div class="card animated-fadein">
+        <h1 style="text-align:center;"><i class="fa-solid fa-users"></i> Buscar Catequizandos por Catequista</h1>
+        <form method="post" class="animated-fadein">
+            {% csrf_token %}
+            <label><i class="fa-solid fa-id-card"></i> ID Catequista:</label>
+            <input type="number" name="idcatequista" required>
+            <button type="submit" class="btn"><i class="fa-solid fa-search"></i> Buscar</button>
+        </form>
+        {% if mensaje %}
+            <div class="error">{{ mensaje }}</div>
+        {% endif %}
+        {% if resultado %}
+        <div class="table-container animated-fadein">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Estado</th>
+                    <th>Parroquia</th>
+                </tr>
+                {% for c in resultado %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.nombres }}</td>
+                    <td>{{ c.apellidos }}</td>
+                    <td>{{ c.estado }}</td>
+                    <td>{{ c.parroquia }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        <a href="{% url 'catequesis:home' %}" class="btn"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</a>
+    </div>
 </body>
 </html>

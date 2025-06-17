@@ -16,6 +16,7 @@ body {
 .main-content {
     padding: 20px;
     text-align: center;
+    margin-bottom: 60px;
 }
 
 .link-list {
@@ -42,8 +43,163 @@ body {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px 0;
+    padding: 2px 0 2px 0;
+    font-size: 12px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 10;
+}
+
+/* --- Modern UI & Animaciones Globales --- */
+
+/* Animación de entrada fade-slide para contenedores principales */
+.animated-fadein {
+    animation: fadeInSlide 0.9s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeInSlide {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botones y enlaces principales */
+button, .btn, input[type="submit"] {
+    background: linear-gradient(90deg,#43a047 60%,#66bb6a 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(56,142,60,0.10);
+    transition: background 0.22s, box-shadow 0.22s, transform 0.18s;
+    margin: 8px 0;
+    outline: none;
+    letter-spacing: 0.5px;
+}
+button:hover, .btn:hover, input[type="submit"]:hover {
+    background: linear-gradient(90deg,#388e3c 60%,#43a047 100%);
+    box-shadow: 0 4px 18px rgba(56,142,60,0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* Tablas modernas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 24px rgba(56,142,60,0.10);
+    overflow: hidden;
+    animation: fadeInSlide 0.8s;
+}
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+}
+th {
+    background: #e8f5e9;
+    color: #388e3c;
+    font-weight: 700;
+    border-bottom: 2px solid #c8e6c9;
+}
+tr {
+    transition: background 0.18s;
+}
+tr:hover {
+    background: #f1f8e9;
+}
+
+/* Formularios modernos */
+form {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 18px rgba(56,142,60,0.10);
+    padding: 32px 24px;
+    max-width: 480px;
+    margin: 32px auto;
+    animation: fadeInSlide 0.9s;
+}
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #388e3c;
+    font-weight: 600;
+}
+input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #c8e6c9;
+    border-radius: 7px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    transition: border 0.2s, box-shadow 0.2s;
+    background: #f9fbe7;
+}
+input:focus, textarea:focus {
+    border: 1.5px solid #43a047;
+    box-shadow: 0 0 0 2px #c8e6c9;
+    outline: none;
+}
+
+/* Tarjetas y contenedores */
+.card, .main-content, .table-container {
+    border-radius: 18px;
+    box-shadow: 0 2px 24px rgba(56,142,60,0.10);
+    background: #fff;
+    padding: 32px 24px;
+    margin: 32px auto;
+    animation: fadeInSlide 0.9s;
+}
+
+/* Enlaces de acción */
+a {
+    color: #388e3c;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #2e7d32;
+    text-decoration: underline;
+}
+
+/* Mensajes */
+.success {
+    color: #2e7d32;
+    background: #e8f5e9;
+    border-left: 4px solid #43a047;
+    padding: 10px 18px;
+    border-radius: 7px;
+    margin-bottom: 18px;
+    animation: fadeInSlide 0.7s;
+}
+.error {
+    color: #c62828;
+    background: #ffebee;
+    border-left: 4px solid #e57373;
+    padding: 10px 18px;
+    border-radius: 7px;
+    margin-bottom: 18px;
+    animation: fadeInSlide 0.7s;
+}
+
+/* Checkbox moderno */
+input[type="checkbox"] {
+    accent-color: #43a047;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    form, .main-content, .card, .table-container {
+        padding: 12px 2vw;
+        max-width: 98vw;
+    }
+    th, td {
+        padding: 8px 4px;
+    }
 }

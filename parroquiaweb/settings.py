@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'ParroquiaDB',
-        'HOST': 'UPEAULA-31320',
+        'HOST': 'localhost\\SQLEXPRESS',
         'PORT': '',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
